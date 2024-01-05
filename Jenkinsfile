@@ -23,7 +23,7 @@ pipeline {
 
         stage("Checkout from SCM"){
                 steps {
-                    git branch: 'main', credentialsId: 'github', url: 'https://github.com/Ashfaque-9x/register-app'
+                    git branch: 'main',  url: 'https://github.com/hesham131595/register-app'
                 }
         }
 
@@ -44,10 +44,10 @@ pipeline {
 //        stage("SonarQube Analysis"){
 //            steps {
 // 	           script {
-// 		        withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') { 
+// 		        withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') {
 //                         sh "mvn sonar:sonar"
 // 		        }
-// 	           }	
+// 	           }
 //            }
 //        }
 
@@ -55,7 +55,7 @@ pipeline {
 //            steps {
 //                script {
 //                     waitForQualityGate abortPipeline: false, credentialsId: 'jenkins-sonarqube-token'
-//                 }	
+//                 }
 //             }
 
 //         }
@@ -104,14 +104,14 @@ pipeline {
 
 //     post {
 //        failure {
-//              emailext body: '''${SCRIPT, template="groovy-html.template"}''', 
-//                       subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Failed", 
+//              emailext body: '''${SCRIPT, template="groovy-html.template"}''',
+//                       subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Failed",
 //                       mimeType: 'text/html',to: "ashfaque.s510@gmail.com"
 //       }
 //       success {
-//             emailext body: '''${SCRIPT, template="groovy-html.template"}''', 
-//                      subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Successful", 
+//             emailext body: '''${SCRIPT, template="groovy-html.template"}''',
+//                      subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Successful",
 //                      mimeType: 'text/html',to: "ashfaque.s510@gmail.com"
-//       }      
+//       }
 //    }
 // }
