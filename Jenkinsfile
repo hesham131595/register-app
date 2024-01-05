@@ -30,7 +30,7 @@ pipeline {
          stage('Check Docker Workspace') {
             steps {
                 sh 'pwd'
-                sh 'ls -la /usr/src/app'
+              
             }
         }
 
