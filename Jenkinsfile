@@ -1,7 +1,8 @@
 pipeline {
     agent {
        docker {
-           image 'maven:3.8.4-openjdk-11'
+           image 'softinstigate/maven-aws'
+        //    image 'maven:3.8.4-openjdk-11'
             args '--user root -v /var/lib/jenkins/workspace/register-app:/workspace -w /workspace'
         }
     
@@ -73,21 +74,27 @@ pipeline {
 
 //         }
 
-//         stage("Build & Push Docker Image") {
-//             steps {
-//                 script {
-//                     docker.withRegistry('',DOCKER_PASS) {
-//                         docker_image = docker.build "${IMAGE_NAME}"
-//                     }
+        // stage("Build & Push Docker Image") {
+        //     steps {
+        //         script {
 
-//                     docker.withRegistry('',DOCKER_PASS) {
-//                         docker_image.push("${IMAGE_TAG}")
-//                         docker_image.push('latest')
-//                     }
-//                 }
-//             }
+        //             def ecrRepository = 'public.ecr.aws/y8h8o1j3/hesham-repo'
+        //             def dockerImageName = "${ecrRepository}/maven-H"
+        //             def dockerImageTag = 'latest' 
+        //             sh "docker build -t ${dockerImageName}:${dockerImageTag} ."
+        //             sh "docker push ${dockerImageName}:${dockerImageTag}"
+                //     docker.withRegistry('',DOCKER_PASS) {
+                //         docker_image = docker.build "${IMAGE_NAME}"
+                //     }
 
-//        }
+                //     docker.withRegistry('',DOCKER_PASS) {
+                //         docker_image.push("${IMAGE_TAG}")
+                //         docker_image.push('latest')
+                //     }
+                // }
+            }
+
+       }
 
 //        stage("Trivy Scan") {
 //            steps {
