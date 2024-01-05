@@ -27,6 +27,13 @@ pipeline {
                 }
         }
 
+         stage('Check Docker Workspace') {
+            steps {
+                sh 'pwd'
+                sh 'ls -la /usr/src/app'
+            }
+        }
+
         stage("Build Application"){
             steps {
                 sh "mvn clean package"
