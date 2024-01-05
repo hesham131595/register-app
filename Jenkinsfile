@@ -2,6 +2,8 @@ pipeline {
     agent {
     docker {
       image 'maven:3.6.3-jdk-8'
+      args '--user root'
+
     //   args '-v /root/.m2:/root/.m2' // mount Docker socket to access the host's Docker daemon
     }
   }
