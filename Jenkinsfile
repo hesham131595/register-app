@@ -1,12 +1,14 @@
 pipeline {
     agent {
-     docker {
-      image 'abhishekf5/maven-abhishek-docker-agent:v1'
-      args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
+       docker {
+           image 'maven:3.8.4-openjdk-11'
+            args '-v /var/lib/jenkins/workspace/register-app:/workspace -w /workspace'
+        }
+    
 
     //   args '-v /root/.m2:/root/.m2' // mount Docker socket to access the host's Docker daemon
+        
     }
-  }
     // environment {
 	//     APP_NAME = "register-app-pipeline"
     //         RELEASE = "1.0.0"
@@ -17,11 +19,11 @@ pipeline {
 	//     JENKINS_API_TOKEN = credentials("JENKINS_API_TOKEN")
     // }
     stages{
-        stage("Cleanup Workspace"){
-                steps {
-                cleanWs()
-                }
-        }
+        // stage("Cleanup Workspace"){
+        //         steps {
+        //         cleanWs()
+        //         }
+        // }
 
         stage("Checkout from SCM"){
                 steps {
