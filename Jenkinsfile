@@ -2,7 +2,7 @@ pipeline {
     agent {
        docker {
            image 'maven:3.8.4-openjdk-11'
-            args '-v /var/lib/jenkins/workspace/register-app:/workspace -w /workspace'
+            args '--user root -v /var/lib/jenkins/workspace/register-app:/workspace -w /workspace'
         }
     
 
@@ -19,6 +19,7 @@ pipeline {
 	//     JENKINS_API_TOKEN = credentials("JENKINS_API_TOKEN")
     // }
     stages {
+
         // stage("Cleanup Workspace"){
         //         steps {
         //         cleanWs()
