@@ -61,7 +61,7 @@ pipeline {
             // }
             steps {
                 script {
-                    sh "apt update && sudo apt upgrade -y"
+                    sh "apt update &&  apt upgrade -y"
                     sh "apt install awscli -y"
                     sh   "aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/y8h8o1j3"
                     sh   "docker build -t hesham-repo ."
