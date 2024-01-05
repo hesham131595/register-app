@@ -92,9 +92,9 @@ pipeline {
                 //         docker_image.push('latest')
                 //     }
                 // }
-            }
+    //         }
 
-       }
+    //    }
 
 //        stage("Trivy Scan") {
 //            steps {
