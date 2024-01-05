@@ -1,8 +1,8 @@
 pipeline {
     agent {
        docker {
-           image 'softinstigate/maven-aws'
-        //    image 'maven:3.8.4-openjdk-11'
+        //    image 'softinstigate/maven-aws'
+            image 'maven:3.8.4-openjdk-11'
             args '--user root -v /var/lib/jenkins/workspace/register-app:/workspace -w /workspace'
         }
     
@@ -74,27 +74,43 @@ pipeline {
 
 //         }
 
-        // stage("Build & Push Docker Image") {
-        //     steps {
-        //         script {
+        stage("Build & Push Docker Image") {
+            agent {
+                docker {
+                   image 'amazon/aws-cli'
+                }
+            }
+            steps {
+                script {
+                    
+                    sh   "aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/y8h8o1j3"
+                    sh   "docker build -t hesham-repo ."
+                    sh   "docker tag hesham-repo:latest public.ecr.aws/y8h8o1j3/hesham-repo:latest"
+                    sh   "docker push public.ecr.aws/y8h8o1j3/hesham-repo:latest"
 
-        //             def ecrRepository = 'public.ecr.aws/y8h8o1j3/hesham-repo'
-        //             def dockerImageName = "${ecrRepository}/maven-H"
-        //             def dockerImageTag = 'latest' 
-        //             sh "docker build -t ${dockerImageName}:${dockerImageTag} ."
-        //             sh "docker push ${dockerImageName}:${dockerImageTag}"
-                //     docker.withRegistry('',DOCKER_PASS) {
-                //         docker_image = docker.build "${IMAGE_NAME}"
-                //     }
 
-                //     docker.withRegistry('',DOCKER_PASS) {
-                //         docker_image.push("${IMAGE_TAG}")
-                //         docker_image.push('latest')
-                //     }
-                // }
-    //         }
+                    // def ecrRepository = 'public.ecr.aws/y8h8o1j3'
+                    // def repoName = 'hesham-repo'
+                    // def imageName = 'maven-H'
+                    // def imageTag = 'latest'
+                    // def ecrregister = 'public.ecr.aws/y8h8o1j3'
+                    // def dockerImageName = "${ecrRepository}/maven-H"
+                    // def dockerImageTag = 'latest' 
+                    // sh "docker build -t ${imageName}:${imageTag} ."
+                    // sh "docker tag ${ImageName}:${ImageTag} ${ecrRepository}/${dockerImageName}:${dockerImageTag}"
+                    // sh 'aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${ecrregister}'
+                    //  sh 'docker push ${ecrRepository}/${dockerImageName}:${dockerImageTag}'
+                    // sh "docker push ${dockerImageName}:${dockerImageTag}"
+                    // docker.withRegistry('',DOCKER_PASS) {
+                    //     docker_image = docker.build "${IMAGE_NAME}"
+                    // }
 
-    //    }
+                    // docker.withRegistry('',DOCKER_PASS) {
+                    //     docker_image.push("${IMAGE_TAG}")
+                    //     docker_image.push('latest')
+                    }
+                }
+            }
 
 //        stage("Trivy Scan") {
 //            steps {
