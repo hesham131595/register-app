@@ -1,8 +1,8 @@
 pipeline {
     agent {
-    docker {
-      image 'maven:3.6.3-jdk-8'
-      args '--user root -v /var/lib/jenkins/workspace/register-app:/workspace -w /workspace'
+     docker {
+      image 'abhishekf5/maven-abhishek-docker-agent:v1'
+      args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
 
     //   args '-v /root/.m2:/root/.m2' // mount Docker socket to access the host's Docker daemon
     }
