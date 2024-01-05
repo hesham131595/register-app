@@ -29,14 +29,15 @@ pipeline {
 
          stage('Check Docker Workspace') {
             steps {
+                sh 'ls -la'
                 sh 'pwd'
-              
+                sh 'whoami'
             }
         }
 
         stage("Build Application"){
             steps {
-                sh "mvn clean package"
+                sh 'mvn clean package'
             }
 
        }
