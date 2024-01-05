@@ -1,9 +1,10 @@
 pipeline {
-    agent { label 'Jenkins-Agent' }
-    tools {
-        jdk 'Java17'
-        maven 'Maven3'
+    agent {
+    docker {
+      image 'maven:3.6.3-jdk-8'
+      args '-v /root/.m2:/root/.m2' // mount Docker socket to access the host's Docker daemon
     }
+  }
     // environment {
 	//     APP_NAME = "register-app-pipeline"
     //         RELEASE = "1.0.0"
